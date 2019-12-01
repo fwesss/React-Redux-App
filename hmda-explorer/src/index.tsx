@@ -5,8 +5,6 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 // Store
 import store from './app/store';
-// UI
-import './index.css';
 
 const render = () => {
   const App = require('./app/App').default;

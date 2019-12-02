@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { ComposableMap, Geographies, Geography } from 'react-simple-maps';
 import { useDispatch } from 'react-redux';
+import { Box } from '@chakra-ui/core';
 import { fetchMetrics } from '../query/querySlice';
 
 const countyMap = 'https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json';
@@ -17,7 +18,7 @@ type County = {
 const Map: FC = () => {
   const dispatch = useDispatch();
 
-  const handleClick = (county: County) => {
+  const handleClick = (county: County): void => {
     const stateCode = Number(county.id.slice(0, 2));
     const countyCode = Number(county.id.slice(2));
 
@@ -25,7 +26,7 @@ const Map: FC = () => {
   };
 
   return (
-    <>
+    <Box w="80%">
       <ComposableMap projection="geoAlbersUsa">
         <Geographies geography={countyMap}>
           {({ geographies }: { readonly geographies: readonly County[] }) =>
@@ -35,7 +36,7 @@ const Map: FC = () => {
           }
         </Geographies>
       </ComposableMap>
-    </>
+    </Box>
   );
 };
 

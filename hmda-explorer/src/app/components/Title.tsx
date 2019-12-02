@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
-import { Text } from '@chakra-ui/core';
+import { Heading } from '@chakra-ui/core';
 
 const Title: FC = ({ children }) => (
-  <Text as="h1" fontFamily="Gudea" fontWeight={700}>
+  <Heading as="h1" fontFamily="Gudea" fontWeight={700}>
     {children}
-  </Text>
+  </Heading>
 );
 
 export default Title;

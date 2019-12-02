@@ -21,7 +21,8 @@
     "downlevelIteration": true
   },
   "include": [
-    "src"
+    "src",
+    "functions"
   ],
   "typedocOptions": {
     "mode": "modules",

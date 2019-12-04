@@ -1,4 +1,6 @@
+// React
 import React, { FC } from 'react';
+// UI
 import { Heading } from '@chakra-ui/core';
 
 const Title: FC = ({ children }) => (

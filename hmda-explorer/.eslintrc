@@ -16,8 +16,8 @@
     "plugin:promise/recommended",
 
     // functional programming
-    "plugin:fp/recommended",
-    "plugin:functional/recommended",
+//    "plugin:fp/recommended",
+//    "plugin:functional/recommended",
 
     // testing
     "plugin:jest/recommended",
@@ -53,8 +53,8 @@
     "jsx-a11y",
     "json-format",
     "optimize-regex",
-    "fp",
-    "functional",
+//    "fp",
+//    "functional",
     "no-use-extend-native",
     "promise",
     "jest",

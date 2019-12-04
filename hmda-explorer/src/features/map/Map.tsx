@@ -1,8 +1,12 @@
+// React
 import React, { FC } from 'react';
+// Map
 import { ComposableMap, Geographies, Geography } from 'react-simple-maps';
-import { useDispatch } from 'react-redux';
+// UI
 import { Box } from '@chakra-ui/core';
-import { fetchMetrics } from '../query/querySlice';
+// Redux
+import { useDispatch } from 'react-redux';
+import { storeQueryParams } from '../query/querySlice';
 
 const countyMap = 'https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json';
 
@@ -18,11 +22,8 @@ type County = {
 const Map: FC = () => {
   const dispatch = useDispatch();
 
-  const handleClick = (county: County): void => {
-    const stateCode = Number(county.id.slice(0, 2));
-    const countyCode = Number(county.id.slice(2));
-
-    dispatch(fetchMetrics(stateCode, countyCode));
+  const handleClick = (countyId: string) => {
+    dispatch(storeQueryParams({ stateCode: Number(countyId.slice(0, 2)), countyCode: Number(countyId.slice(2)) }));
   };
 
   return (
@@ -31,7 +32,7 @@ const Map: FC = () => {
         <Geographies geography={countyMap}>
           {({ geographies }: { readonly geographies: readonly County[] }) =>
             geographies.map(county => {
-              return <Geography key={county.rsmKey} geography={county} onClick={() => handleClick(county)} />;
+              return <Geography key={county.rsmKey} geography={county} onClick={() => handleClick(county.id)} />;
             })
           }
         </Geographies>

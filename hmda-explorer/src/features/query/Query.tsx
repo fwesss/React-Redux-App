@@ -11,10 +11,11 @@ import { years, states, counties } from './formOptions';
 import { RootState } from '../../app/rootReducer';
 
 const Query: FC = () => {
+  const { stateCode } = useSelector((state: RootState) => state.getMetrics);
   const { stateName, countyName, year } = useSelector((state: RootState) => state.getMetrics);
   const dispatch = useDispatch();
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>): void => {
     if (event.target.name === 'stateName') {
       dispatch(
         storeQueryParams({
@@ -24,16 +25,18 @@ const Query: FC = () => {
     } else if (event.target.name === 'countyName') {
       dispatch(
         storeQueryParams({
-          countyCode: counties.filter(county => county.name === event.target.value)[0].code
+          countyCode: counties.filter(county => county.name === event.target.value && county.stateCode === stateCode)[0]
+            .code
         })
       );
     }
+
     dispatch(storeQueryParams({ [event.target.name]: event.target.value }));
   };
 
   return (
-    <FormControl>
-      <FormLabel id="year-label" htmlFor="year">
+    <FormControl fontFamily="body">
+      <FormLabel mt="1rem" id="year-label" htmlFor="year">
         Year
       </FormLabel>
       <Select id="year" name="year" value={year} aria-labelledby="year-label" onChange={handleChange}>
@@ -44,7 +47,7 @@ const Query: FC = () => {
         ))}
       </Select>
 
-      <FormLabel id="state-label" htmlFor="state">
+      <FormLabel mt="1rem" id="state-label" htmlFor="state">
         State
       </FormLabel>
       <Select id="state" name="stateName" value={stateName} aria-labelledby="state-label" onChange={handleChange}>
@@ -55,7 +58,7 @@ const Query: FC = () => {
         ))}
       </Select>
 
-      <FormLabel id="county-label" htmlFor="county">
+      <FormLabel mt="1rem" id="county-label" htmlFor="county">
         County
       </FormLabel>
       <Select id="county" name="countyName" value={countyName} aria-labelledby="county-label" onChange={handleChange}>

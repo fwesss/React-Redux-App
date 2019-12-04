@@ -1,9 +1,9 @@
 // React
 import React, { FC, useEffect } from 'react';
 // UI
-import { CSSReset, ThemeProvider, Flex } from '@chakra-ui/core';
+import { ThemeProvider, Flex, CSSReset } from '@chakra-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
-import theme from './theme/theme';
+import customTheme from './theme/theme';
 // Redux
 import { fetchMetrics } from '../features/query/querySlice';
 // Components
@@ -19,10 +19,10 @@ const App: FC = () => {
 
   useEffect(() => {
     dispatch(fetchMetrics(stateCode, countyCode, year));
-  }, [countyCode, dispatch, year]);
+  }, [countyCode, dispatch, stateCode, year]);
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={customTheme}>
       <CSSReset />
       <LoadingSpinner />
       <Flex>

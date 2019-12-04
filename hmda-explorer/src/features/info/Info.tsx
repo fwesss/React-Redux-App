@@ -3,11 +3,14 @@ import { jsx, css } from '@emotion/core';
 // React
 import React, { FC } from 'react';
 // UI
-import { Box, Heading, List, ListItem, Text } from '@chakra-ui/core';
+import { Box, Heading, List, ListItem } from '@chakra-ui/core';
+// Redux
 import { useSelector } from 'react-redux';
-import { RootState } from '../../app/rootReducer';
+// Components
 import Title from '../../app/components/Title';
 import Query from '../query/Query';
+// Types
+import { RootState } from '../../app/rootReducer';
 
 const Info: FC = () => {
   const {
@@ -26,21 +29,26 @@ const Info: FC = () => {
   } = useSelector((state: RootState) => state.getMetrics);
 
   return (
-    <Box w="20%" pt="10rem" px="2rem" css={fetching && { display: 'none' }}>
+    <Box w="20%" pt="10rem" px="2rem" position="fixed" right={0} css={fetching && { display: 'none' }}>
       <Title>{stateName}</Title>
-      <Heading>{countyName}</Heading>
-      <Text>{resultsYear}</Text>
-      <List>
-        <ListItem>{`Loans Closed: ${transactions}`}</ListItem>
-        <ListItem>{`Median Income: $${medianIncome.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}`}</ListItem>
-        <ListItem>{`Median Income of Homebuyers: $${homebuyersMedianIncome
+      <Heading fontFamily="heading">{countyName}</Heading>
+
+      <List p={0} fontFamily="body">
+        <ListItem p="0.25rem">{resultsYear}</ListItem>
+        <ListItem p="0.25rem">{`Loans Closed: ${transactions}`}</ListItem>
+        <ListItem p="0.25rem">{`Median Income: $${medianIncome
           .toFixed(2)
           .replace(/\d(?=(\d{3})+\.)/g, '$&,')}`}</ListItem>
-        <ListItem>{`Median Loan Amount: $${medianLoanAmount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}`}</ListItem>
-        <ListItem>{`Home Buyer Income To Loan Amount Ratio: ${Math.trunc(
+        <ListItem p="0.25rem">{`Median Income of Homebuyers: $${homebuyersMedianIncome
+          .toFixed(2)
+          .replace(/\d(?=(\d{3})+\.)/g, '$&,')}`}</ListItem>
+        <ListItem p="0.25rem">{`Median Loan Amount: $${medianLoanAmount
+          .toFixed(2)
+          .replace(/\d(?=(\d{3})+\.)/g, '$&,')}`}</ListItem>
+        <ListItem p="0.25rem">{`Home Buyer Income To Loan Amount Ratio: ${Math.trunc(
           Math.round(homebuyerIncomeToLoanAmount * 100)
         )}%`}</ListItem>
-        <ListItem>{`Resident Income To Loan Amount Ratio: ${Math.trunc(
+        <ListItem p="0.25rem">{`Resident Income To Loan Amount Ratio: ${Math.trunc(
           Math.round(incomeToLoanAmount * 100)
         )}%`}</ListItem>
       </List>

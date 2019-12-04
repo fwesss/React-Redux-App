@@ -1,9 +1,11 @@
 import { theme } from '@chakra-ui/core';
 
-export default {
+const customTheme = {
   ...theme,
   fonts: {
     body: "'Cantarell', sans-serif",
-    heading: "'Carrois Gothic', sans-serif"
+    heading: 'Carrois Gothic, sans-serif'
   }
 };
+
+export default customTheme;

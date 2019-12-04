@@ -7,6 +7,8 @@ import { Box } from '@chakra-ui/core';
 // Redux
 import { useDispatch } from 'react-redux';
 import { storeQueryParams } from '../query/querySlice';
+// Data
+import { counties, states } from '../query/formOptions';
 
 const countyMap = 'https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json';
 
@@ -23,7 +25,12 @@ const Map: FC = () => {
   const dispatch = useDispatch();
 
   const handleClick = (countyId: string) => {
-    dispatch(storeQueryParams({ stateCode: Number(countyId.slice(0, 2)), countyCode: Number(countyId.slice(2)) }));
+    const stateCode = Number(countyId.slice(0, 2));
+    const stateName = states.filter(state => state.code === stateCode)[0].name;
+    const countyCode = Number(countyId.slice(2));
+    const countyName = counties.filter(county => county.code === countyCode && county.stateCode === stateCode)[0].name;
+
+    dispatch(storeQueryParams({ stateCode, stateName, countyCode, countyName }));
   };
 
   return (

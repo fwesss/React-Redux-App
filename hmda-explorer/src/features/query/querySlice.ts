@@ -8,10 +8,12 @@ import { RootState } from '../../app/rootReducer';
 
 type initialState = {
   countyCode: number;
+  countyName: string;
   year: number;
   success: {};
   apiQuery: {};
   stateCode: number;
+  stateName: string;
   fetching: boolean;
   metrics: {
     stateName: string;
@@ -49,7 +51,9 @@ const initialState = {
   },
   year: 2017,
   stateCode: 6,
-  countyCode: 71
+  stateName: 'California',
+  countyCode: 71,
+  countyName: 'San Bernardino County'
 };
 
 const getMetrics = createSlice({
@@ -86,13 +90,21 @@ const getMetrics = createSlice({
       };
     },
     storeQueryParams(state, action): initialState {
-      const { year = state.year, stateCode = state.stateCode, countyCode = state.countyCode } = action.payload;
+      const {
+        year = state.year,
+        stateCode = state.stateCode,
+        stateName = state.stateName,
+        countyCode = state.countyCode,
+        countyName = state.countyName
+      } = action.payload;
 
       return {
         ...state,
         year,
         stateCode,
-        countyCode
+        stateName,
+        countyCode,
+        countyName
       };
     }
   }
@@ -105,7 +117,7 @@ export default getMetrics.reducer;
 export const fetchMetrics = (
   stateCode: number,
   countyCode: number,
-  year = 2017
+  year: number
 ): ThunkAction<void, RootState, null, Action<string>> => async (dispatch): Promise<void> => {
   dispatch(fetchingMetrics());
   try {

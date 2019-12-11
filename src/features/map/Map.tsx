@@ -9,8 +9,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { storeQueryParams } from '../query/querySlice';
 // Data
 import { counties, states } from '../query/formOptions';
-import { RootState } from '../../app/rootReducer';
+// Utils
 import ensure from '../../utils/ensure';
+// Types
+import { RootState } from '../../app/rootReducer';
 
 const countyMap = 'https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json';
 

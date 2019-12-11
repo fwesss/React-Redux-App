@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 // Redux
 import { Provider } from 'react-redux';
 // Store
-import { store } from './app/rootReducer';
+import store from './app/store';
 // App
 import App from './app/App';
 

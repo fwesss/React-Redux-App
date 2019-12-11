@@ -1,5 +1,8 @@
 /** @jsx jsx */
+// React
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import React, { FC } from 'react';
+// UI
 import { jsx } from '@emotion/core';
 import {
   Modal,
@@ -8,7 +11,9 @@ import {
   Spinner,
   Box,
 } from '@chakra-ui/core';
+// Redux
 import { useSelector } from 'react-redux';
+// Types
 import { RootState } from '../rootReducer';
 
 const LoadingSpinner: FC = () => {

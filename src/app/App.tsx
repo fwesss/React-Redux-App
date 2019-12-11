@@ -21,7 +21,8 @@ const App: FC = () => {
 
   useEffect(() => {
     dispatch(fetchMetrics(stateCode, countyCode, year));
-  }, [countyCode, dispatch, stateCode, year]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [countyCode, dispatch, year]);
 
   return (
     <ThemeProvider theme={customTheme}>

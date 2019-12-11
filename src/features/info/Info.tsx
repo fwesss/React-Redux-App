@@ -1,6 +1,7 @@
 /** @jsx jsx */
-import { jsx, css } from '@emotion/core';
+import { jsx } from '@emotion/core';
 // React
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import React, { FC } from 'react';
 // UI
 import { Box, Heading, List, ListItem } from '@chakra-ui/core';

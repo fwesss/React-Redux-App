@@ -5,32 +5,6 @@ type Result = {
   [key: string]: number;
 };
 
-type Data = {
-  readonly computing: boolean | null;
-  readonly dataset: string;
-  readonly dimensions: string | null;
-  readonly errors: {};
-  readonly page: number;
-  readonly query: {
-    readonly group: string | null;
-    readonly limit: number;
-    readonly offset: number;
-    readonly orderBy: string;
-    readonly select: string;
-    readonly where: string | null;
-  };
-  readonly results: Result[];
-  readonly size: number;
-  readonly slice: string;
-  readonly total: number;
-  readonly _links: readonly [
-    {
-      readonly href: string;
-      readonly rel: string;
-    }
-  ];
-};
-
 const calculateSum = (applicants: Result[], field: string): number =>
   applicants.reduce((accumulator, currentValue) => ({
     [field]: accumulator[field] + currentValue[field],
@@ -49,8 +23,25 @@ const calculateMedian = (applicants: Result[], field: string): number => {
   return (values[half - 1] + values[half]) / 2;
 };
 
-const aggregateData: (data: string) => {} = (data: string) => {
-  const parsedData: Data = JSON.parse(data);
+const aggregateData: (
+  data: string
+) => {
+  [key: string]: string | {};
+  results: {
+    stateName: string;
+    countyName: string;
+    homebuyersAverageIncome: number;
+    homebuyersMedianIncome: number;
+    medianIncome: number;
+    medianLoanAmount: number;
+    averageLoanAmount: number;
+    incomeToLoanAmount: number;
+    homebuyerIncomeToLoanAmount: number;
+    transactions: number;
+    resultsYear: number;
+  };
+} = (data: string) => {
+  const parsedData = JSON.parse(data);
 
   const resultsYear = parsedData.results[0].as_of_year;
   const stateName = parsedData.results[0].state_name;

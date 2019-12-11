@@ -71,7 +71,7 @@ const getMetrics = createSlice({
       const {
         data: { results, query },
         ...requestInfo
-      } = action.payload;
+      } = JSON.parse(action.payload);
 
       return {
         ...state,
@@ -85,7 +85,7 @@ const getMetrics = createSlice({
     fetchMetricsError(state, action): initialState {
       return {
         ...state,
-        error: action.payload,
+        error: JSON.parse(action.payload),
         success: {},
         fetching: false,
       };
@@ -130,8 +130,8 @@ export const fetchMetrics = (
   dispatch(fetchingMetrics());
   try {
     const metrics = await requestMetrics(stateCode, countyCode, year);
-    dispatch(fetchMetricsSuccess(metrics));
+    dispatch(fetchMetricsSuccess(JSON.stringify(metrics)));
   } catch (error) {
-    dispatch(fetchMetricsError(error));
+    dispatch(fetchMetricsError(JSON.stringify(error)));
   }
 };

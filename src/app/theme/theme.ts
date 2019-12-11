@@ -1,3 +1,4 @@
+// Chakra Theme
 import { theme } from '@chakra-ui/core';
 
 const customTheme = {

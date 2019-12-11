@@ -17,7 +17,6 @@ const Info: FC = () => {
     fetching,
     metrics: {
       resultsYear,
-      transactions,
       stateName,
       countyName,
       medianIncome,
@@ -35,7 +34,6 @@ const Info: FC = () => {
 
       <List p={0} fontFamily="body">
         <ListItem p="0.25rem">{resultsYear}</ListItem>
-        <ListItem p="0.25rem">{`Loans Closed: ${transactions}`}</ListItem>
         <ListItem p="0.25rem">{`Median Income: $${medianIncome
           .toFixed(2)
           .replace(/\d(?=(\d{3})+\.)/g, '$&,')}`}</ListItem>

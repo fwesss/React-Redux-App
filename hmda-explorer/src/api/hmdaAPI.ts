@@ -125,7 +125,7 @@ const hmdaInstance = axios.create({
 
 const requestMetrics = (stateCode: number, countyCode: number, year: number): AxiosPromise =>
   hmdaInstance.get(
-    `/hmda_lar.json?$select=as_of_year%2C+state_name%2C+county_name%2C+hud_median_family_income%2C+applicant_income_000s%2C+loan_amount_000s&$where=state_code%3D${stateCode}+AND+county_code%3D${countyCode}+AND+as_of_year%3D${year}+AND+hud_median_family_income+IS+NOT+NULL+AND+loan_amount_000s+IS+NOT+NULL+AND+applicant_income_000s+IS+NOT+NULL+AND+loan_purpose%3D1+AND+lien_status%3D1+AND+action_taken%3D1+AND+owner_occupancy%3D1&$limit=999999999&$offset=0`
+    `/hmda_lar.json?$select=as_of_year%2C+state_name%2C+county_name%2C+hud_median_family_income%2C+applicant_income_000s%2C+loan_amount_000s&$where=state_code%3D${stateCode}+AND+county_code%3D${countyCode}+AND+as_of_year%3D${year}+AND+hud_median_family_income+IS+NOT+NULL+AND+loan_amount_000s+IS+NOT+NULL+AND+applicant_income_000s+IS+NOT+NULL+AND+loan_purpose%3D1+AND+lien_status%3D1+AND+action_taken%3D1+AND+owner_occupancy%3D1&$limit=1000&$offset=0`
   );
 
 export default requestMetrics;

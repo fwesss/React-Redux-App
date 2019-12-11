@@ -1,10 +1,23 @@
 {
-  "env": {
-    "browser": true,
-    "es6": true
+  "parserOptions": {
+    "ecmaVersion": 2019,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
   },
+  "plugins": [
+    "import",
+    "react",
+    "react-hooks",
+    "jsx-a11y",
+    "json-format",
+    "optimize-regex"
+  ],
   "extends": [
+    "react-app",
     "eslint:recommended",
+    "eslint-config-prettier",
     "plugin:import/errors",
     "plugin:import/warnings",
     "plugin:import/typescript",
@@ -12,62 +25,23 @@
     "plugin:jsx-a11y/recommended",
     "airbnb",
     "airbnb/hooks",
-    "plugin:eslint-comments/recommended",
-    "plugin:promise/recommended",
 
-    // functional programming
-//    "plugin:fp/recommended",
-//    "plugin:functional/recommended",
-
-    // testing
-    "plugin:jest/recommended",
-    "plugin:jest/style",
-    "plugin:jest-formatting/recommended",
-    "plugin:testing-library/recommended",
-    "plugin:testing-library/react",
-    "plugin:cypress/recommended",
-
-    // typescript
-    "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:@typescript-eslint/recommended-requiring-type-checking",
-
-    // must be last plugins
+    // must be last
     "plugin:prettier/recommended",
-    "prettier/@typescript-eslint",
     "prettier/react"
   ],
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "ecmaFeatures": {
-      "jsx": true
-    },
-    "ecmaVersion": 6,
-    "project": "./tsconfig.json"
-  },
-  "plugins": [
-    "@typescript-eslint",
-    "import",
-    "react",
-    "react-hooks",
-    "jsx-a11y",
-    "json-format",
-    "optimize-regex",
-//    "fp",
-//    "functional",
-    "no-use-extend-native",
-    "promise",
-    "jest",
-    "jest-formatting",
-    "testing-library",
-    "cypress"
-  ],
   "rules": {
+    "strict": ["error", "never"],
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "optimize-regex/optimize-regex": "warn",
     "react/jsx-filename-extension": "off",
-    "react/prop-types": "off"
+    "react/prop-types": "off",
+    "spaced-comment": ["error", "always", { "markers": ["/"] }]
+  },
+  "env": {
+    "browser": true,
+    "es6": true
   },
   "settings": {
     "import/resolver": {
@@ -85,11 +59,26 @@
         ".ts",
         ".tsx"
       ]
-    },
-    "json/sort-package-json": "standard",
-    "json/ignore-files": [
-      "**/package-lock.json"
-    ],
-    "json/json-with-comments-files": []
-  }
+    }
+  },
+  "overrides": [
+    {
+      "files": "**/*.+(ts|tsx)",
+      "parser": "@typescript-eslint/parser",
+      "parserOptions": {
+        "project": "./tsconfig.json"
+      },
+      "plugins": [
+        "@typescript-eslint",
+        "@typescript-eslint/eslint-plugin"
+      ],
+      "extends": [
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/recommended-requiring-type-checking",
+        "eslint-config-prettier/@typescript-eslint",
+        "prettier/@typescript-eslint"
+      ]
+    }
+  ]
 }

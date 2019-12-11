@@ -23,12 +23,19 @@ const Info: FC = () => {
       homebuyersMedianIncome,
       medianLoanAmount,
       incomeToLoanAmount,
-      homebuyerIncomeToLoanAmount
-    }
+      homebuyerIncomeToLoanAmount,
+    },
   } = useSelector((state: RootState) => state.getMetrics);
 
   return (
-    <Box w="20%" pt="10rem" px="2rem" position="fixed" right={0} css={fetching && { display: 'none' }}>
+    <Box
+      w="20%"
+      pt="10rem"
+      px="2rem"
+      position="fixed"
+      right={0}
+      css={fetching && { display: 'none' }}
+    >
       <Title>{stateName}</Title>
       <Heading fontFamily="heading">{countyName}</Heading>
 

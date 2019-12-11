@@ -1,9 +1,10 @@
 // Redux Toolkit
 import { Action, createSlice } from '@reduxjs/toolkit';
-// API
 import { ThunkAction } from 'redux-thunk';
+// API
 import requestMetrics from '../../api/hmdaAPI';
 // Types
+// eslint-disable-next-line import/no-cycle
 import { RootState } from '../../app/rootReducer';
 
 type initialState = {
@@ -47,13 +48,13 @@ const initialState = {
     incomeToLoanAmount: 0,
     homebuyerIncomeToLoanAmount: 0,
     transactions: 0,
-    resultsYear: 0
+    resultsYear: 0,
   },
   year: 2017,
   stateCode: 6,
   stateName: 'California',
   countyCode: 71,
-  countyName: 'San Bernardino County'
+  countyName: 'San Bernardino County',
 };
 
 const getMetrics = createSlice({
@@ -63,7 +64,7 @@ const getMetrics = createSlice({
     fetchingMetrics(state): initialState {
       return {
         ...state,
-        fetching: true
+        fetching: true,
       };
     },
     fetchMetricsSuccess(state, action): initialState {
@@ -78,7 +79,7 @@ const getMetrics = createSlice({
         error: {},
         success: requestInfo,
         apiQuery: query,
-        fetching: false
+        fetching: false,
       };
     },
     fetchMetricsError(state, action): initialState {
@@ -86,7 +87,7 @@ const getMetrics = createSlice({
         ...state,
         error: action.payload,
         success: {},
-        fetching: false
+        fetching: false,
       };
     },
     storeQueryParams(state, action): initialState {
@@ -95,7 +96,7 @@ const getMetrics = createSlice({
         stateCode = state.stateCode,
         stateName = state.stateName,
         countyCode = state.countyCode,
-        countyName = state.countyName
+        countyName = state.countyName,
       } = action.payload;
 
       return {
@@ -104,13 +105,18 @@ const getMetrics = createSlice({
         stateCode,
         stateName,
         countyCode,
-        countyName
+        countyName,
       };
-    }
-  }
+    },
+  },
 });
 
-export const { fetchingMetrics, fetchMetricsSuccess, fetchMetricsError, storeQueryParams } = getMetrics.actions;
+export const {
+  fetchingMetrics,
+  fetchMetricsSuccess,
+  fetchMetricsError,
+  storeQueryParams,
+} = getMetrics.actions;
 
 export default getMetrics.reducer;
 
@@ -118,7 +124,9 @@ export const fetchMetrics = (
   stateCode: number,
   countyCode: number,
   year: number
-): ThunkAction<void, RootState, null, Action<string>> => async (dispatch): Promise<void> => {
+): ThunkAction<void, RootState, null, Action<string>> => async (
+  dispatch
+): Promise<void> => {
   dispatch(fetchingMetrics());
   try {
     const metrics = await requestMetrics(stateCode, countyCode, year);

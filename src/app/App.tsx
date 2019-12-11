@@ -14,7 +14,9 @@ import Info from '../features/info/Info';
 import { RootState } from './rootReducer';
 
 const App: FC = () => {
-  const { stateCode, countyCode, year } = useSelector((state: RootState) => state.getMetrics);
+  const { stateCode, countyCode, year } = useSelector(
+    (state: RootState) => state.getMetrics
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {

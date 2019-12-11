@@ -10,33 +10,41 @@ import { storeQueryParams } from '../query/querySlice';
 // Data
 import { counties, states } from '../query/formOptions';
 import { RootState } from '../../app/rootReducer';
+import ensure from '../../utils/ensure';
 
 const countyMap = 'https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json';
 
 type County = {
-  readonly geometry: {};
   readonly id: string;
-  readonly properties: {};
   readonly rsmKey: string;
-  readonly svgPath: string;
-  readonly type: string;
 };
 
 const Map: FC = () => {
-  const { stateCode, countyCode } = useSelector((state: RootState) => state.getMetrics);
+  const { stateCode, countyCode } = useSelector(
+    (state: RootState) => state.getMetrics
+  );
   const [geographyId, setGeographyId] = useState('');
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setGeographyId(stateCode.toString().padStart(2, '0') + countyCode.toString().padStart(3, '0'));
+    setGeographyId(
+      stateCode.toString().padStart(2, '0') +
+        countyCode.toString().padStart(3, '0')
+    );
   }, [countyCode, stateCode]);
 
   const handleClick = (countyId: string): void => {
     const newStateCode = Number(countyId.slice(0, 2));
-    const stateName = states.filter(state => state.code === newStateCode)[0].name;
+    const stateName = ensure(
+      states.find((state) => state.code === newStateCode)
+    ).name;
     const newCountyCode = Number(countyId.slice(2));
-    const countyName = counties.filter(county => county.code === newCountyCode && county.stateCode === newStateCode)[0]
-      .name;
+    const countyName = ensure(
+      counties.find(
+        (county) =>
+          county.code === newCountyCode && county.stateCode === newStateCode
+      )
+    ).name;
 
     dispatch(
       storeQueryParams({
@@ -44,7 +52,7 @@ const Map: FC = () => {
         stateCode: newStateCode,
         stateName,
         countyCode: newCountyCode,
-        countyName
+        countyName,
       })
     );
   };
@@ -53,8 +61,12 @@ const Map: FC = () => {
     <Box w="80%">
       <ComposableMap projection="geoAlbersUsa">
         <Geographies geography={countyMap}>
-          {({ geographies }: { readonly geographies: readonly County[] }) =>
-            geographies.map(county => {
+          {({
+            geographies,
+          }: {
+            readonly geographies: readonly County[];
+          }): unknown[] =>
+            geographies.map((county) => {
               return (
                 <Geography
                   key={county.rsmKey}

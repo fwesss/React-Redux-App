@@ -1,12 +1,15 @@
 // Redux Toolkit
-import { combineReducers } from '@reduxjs/toolkit';
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
 // Reducers
+// eslint-disable-next-line import/no-cycle
 import getMetricsReducer from '../features/query/querySlice';
-
-const rootReducer = combineReducers({
-  getMetrics: getMetricsReducer
-});
 
 export type RootState = ReturnType<typeof rootReducer>;
 
-export default rootReducer;
+export const rootReducer = combineReducers({
+  getMetrics: getMetricsReducer,
+});
+
+export const store = configureStore({
+  reducer: rootReducer,
+});

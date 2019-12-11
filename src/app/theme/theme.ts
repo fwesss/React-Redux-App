@@ -4,8 +4,8 @@ const customTheme = {
   ...theme,
   fonts: {
     body: "'Cantarell', sans-serif",
-    heading: 'Carrois Gothic, sans-serif'
-  }
+    heading: 'Carrois Gothic, sans-serif',
+  },
 };
 
 export default customTheme;

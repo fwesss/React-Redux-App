@@ -1,5 +1,5 @@
 // React
-import React, { FC, useEffect } from 'react';
+import React, { FC, useCallback, useEffect } from 'react';
 // UI
 import { ThemeProvider, Flex, CSSReset } from '@chakra-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
@@ -19,10 +19,11 @@ const App: FC = () => {
   );
   const dispatch = useDispatch();
 
-  useEffect(() => {
+  const triggerFetch = useCallback(() => {
     dispatch(fetchMetrics(stateCode, countyCode, year));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [countyCode, dispatch, year]);
+  }, [countyCode, dispatch, stateCode, year]);
+
+  useEffect(triggerFetch, [countyCode, dispatch, year]);
 
   return (
     <ThemeProvider theme={customTheme}>

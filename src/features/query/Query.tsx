@@ -55,7 +55,7 @@ const Query: FC = () => {
       <Select
         id="year"
         name="year"
-        value={year}
+        defaultValue={year}
         aria-labelledby="year-label"
         onChange={handleChange}
       >
@@ -72,7 +72,7 @@ const Query: FC = () => {
       <Select
         id="state"
         name="stateName"
-        value={stateName}
+        defaultValue={stateName}
         aria-labelledby="state-label"
         onChange={handleChange}
       >
@@ -89,7 +89,7 @@ const Query: FC = () => {
       <Select
         id="county"
         name="countyName"
-        value={countyName}
+        defaultValue={countyName}
         aria-labelledby="county-label"
         onChange={handleChange}
       >
